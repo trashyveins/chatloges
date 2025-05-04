@@ -1,0 +1,90 @@
+<!DOCTYPE html><html lang="fr"><head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	   	<meta name="author" content="chocomint">
+		<meta name="description" content="chatlog magician for gta:world">
+		<title>GTAW - Chatlog Magician</title>
+		<meta name="keywords" content="GTAWorld, GTA:World, chatlog magician, chatlog, magician">
+		<link rel="stylesheet" href="css/bootstrap.min.css" crossorigin="anonymous">
+		<link href="css/spectrum.min.css" rel="stylesheet">
+		<link href="css/style.min.css" rel="stylesheet">
+		<link rel="icon" href="images/favicon.ico">
+	</head>
+	<body>
+		<br>
+		 <div class="container">
+		 	<div class="row header">
+				<img src="images/logo.png" class="mx-auto d-block">  
+			</div>
+			<div class="row name">
+				<div class="col-xs-12">
+					<input type="hidden" class="form-control" id="name">
+				</div>  
+			</div>
+			<br>
+			<div class="clog_settings">
+				<div class="row fontsize" id="bal">
+					<div class="col-xs-12">
+						<span id="font-label">size (13px):</span><br>
+						<button class="btn btn-default disabled" type="submit" id="decrease-fontsize">-</button>
+						<button class="btn btn-default" type="submit" id="reset-fontsize">reset</button>
+						<button class="btn btn-default" type="submit" id="increase-fontsize">+</button>
+					</div>  
+				</div>  
+				<div class="row color" id="jobb">
+					<div class="col-xs-12">
+						<span>color:</span>
+						<input type="text" id="color-picker">
+						<br>
+					</div>  
+				</div>
+			</div>
+					<center><textarea class="form-control textarea-input" rows="15" placeholder="Copy your chatlog here."></textarea></center>
+					<br>
+					<div class="output" id="output"></div>   
+			</div>
+			<br <div="" class="col-xs-12">
+				<center><button id="downloadOutputTransparent" class="btn btn-success">Download As Transparent Image</button></center><br>
+				<center><button id="downloadOutput" class="btn btn-success">Download As Filled Image</button></center>
+				<script src="js/domtoimage.min.js"></script>
+				<script src="js/FileSaver.min.js"></script>
+				<script src="js/jquery.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+				<script>
+					
+					 $(document).ready(function() {
+						$("#downloadOutput").click(function() {
+							//generated").css("background-color", "transparent");
+							domtoimage.toBlob(document.getElementById('output'))
+							.then(function (blob) {
+								window.saveAs(blob, new Date().toLocaleString().replaceAll(",", "_").replaceAll(" ", "_")
+																.replaceAll("/", "-").replace("__", "_").replaceAll(":", "-") + "_" + "chatlog.png")
+							})
+							.then(function(blob) {
+								$(".generated").css("background-color","#" + $("#color-picker").spectrum("get").toHex());
+							})
+						})
+						$("#downloadOutputTransparent").click(function() {
+							$(".generated").css("background-color", "transparent");
+							domtoimage.toBlob(document.getElementById('output'))
+							.then(function (blob) {
+								window.saveAs(blob, new Date().toLocaleString().replaceAll(",", "_").replaceAll(" ", "_")
+																.replaceAll("/", "-").replace("__", "_").replaceAll(":", "-") + "_" + "chatlog.png")
+							})
+							.then(function(blob) {
+								$(".generated").css("background-color","#" + $("#color-picker").spectrum("get").toHex());
+							})
+						})
+					}) 
+
+				</script>
+				
+			
+		
+		<script src="js/json2.min.js"></script>
+		<script src="js/jstorage.min.js"></script>
+		<script src="js/spectrum.min.js"></script>
+		<script src="js/scripts.min.js"></script>
+	
+
+</body></html>
